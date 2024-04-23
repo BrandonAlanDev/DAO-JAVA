@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 
 import controller.Articulo;
@@ -17,7 +18,7 @@ public class DaoArticulos implements IDao<Articulo> {
 			Connection conx = cnn.conectar();
 			PreparedStatement comando=conx.prepareStatement("insert into articulos (nombre,cantidad) values (?,?)");
 			comando.setString(1,art.getNombre());
-			comando.setInt(2,art.getCantidad());
+			comando.setInt(2,Integer.parseInt(art.getCantidad()));
 			comando.executeUpdate();
 			cnn.desconectar();
 		} catch (Exception e) {
@@ -30,7 +31,7 @@ public class DaoArticulos implements IDao<Articulo> {
 		return new Articulo();
 	}
 	public List<Articulo> listar() throws Exception{
-		
-		return new List<Articulo>();
+		List<Articulo> articulos = new ArrayList<Articulo>();
+		return articulos;
 	}
 }
