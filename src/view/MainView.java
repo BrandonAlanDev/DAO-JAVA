@@ -5,11 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.Articulo;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -20,9 +25,20 @@ public class MainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel container;
-	private JTextField nombreTF;
-	private JTextField cantidadTF;
-	private JTextField codigoTF;
+	public JTextField nombreTF;
+	public JTextField cantidadTF;
+	public JTextField codigoTF;
+	public JButton btnBuscar;
+	public JButton btnEliminar;
+	public JButton btnModificar;
+	public JButton btnAgregar;
+	public JLabel lblNombreResultado;
+	public JLabel lblCodigoResultado;
+	public JLabel lblCantidadResultado;
+	public JList<Articulo> list= new JList<>(new DefaultListModel<>());
+	public DefaultListModel<Articulo> modelo = (DefaultListModel<Articulo>) list.getModel();
+	
+	
 
 	public MainView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,7 +88,7 @@ public class MainView extends JFrame {
 		izquierda.add(panelA);
 		panelA.setBackground(new Color(38, 82, 91));
 		
-		JButton btnAgregar = new JButton("Agregar");
+		btnAgregar = new JButton("Agregar");
 		panelA.add(btnAgregar);
 		
 		JPanel panelCodigo = new JPanel();
@@ -92,13 +108,13 @@ public class MainView extends JFrame {
 		izquierda.add(panelBEM);
 		panelBEM.setBackground(new Color(38, 82, 91));
 		
-		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar = new JButton("Buscar");
 		panelBEM.add(btnBuscar);
 		
-		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton("Eliminar");
 		panelBEM.add(btnEliminar);
 		
-		JButton btnModificar = new JButton("Modificar");
+		btnModificar = new JButton("Modificar");
 		panelBEM.add(btnModificar);
 		
 		JPanel panelNombreInfo = new JPanel();
@@ -110,10 +126,15 @@ public class MainView extends JFrame {
 		lblNombreInf.setForeground(new Color(255, 255, 255));
 		lblNombreInf.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JLabel lblNombreResultado = new JLabel("Mi Nombre");
+		lblNombreResultado = new JLabel("Mi Nombre");
 		panelNombreInfo.add(lblNombreResultado);
 		lblNombreResultado.setForeground(new Color(255, 255, 255));
 		lblNombreResultado.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		lblCantidadResultado = new JLabel("Cantidad");
+		lblCantidadResultado.setForeground(Color.WHITE);
+		lblCantidadResultado.setFont(new Font("Tahoma", Font.BOLD, 14));
+		panelNombreInfo.add(lblCantidadResultado);
 		
 		JPanel panelCodigoInfo = new JPanel();
 		izquierda.add(panelCodigoInfo);
@@ -124,7 +145,7 @@ public class MainView extends JFrame {
 		lblCodigoInf.setForeground(new Color(255, 255, 255));
 		lblCodigoInf.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JLabel lblCodigoResultado = new JLabel("Mi Codigo");
+		lblCodigoResultado = new JLabel("Mi Codigo");
 		panelCodigoInfo.add(lblCodigoResultado);
 		lblCodigoResultado.setForeground(new Color(255, 255, 255));
 		lblCodigoResultado.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -134,7 +155,6 @@ public class MainView extends JFrame {
 		derecha.setBackground(new Color(38, 82, 91));
 		container.add(derecha);
 		
-		JList list = new JList();
 		derecha.add(list);
 	}
 

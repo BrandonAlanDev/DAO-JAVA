@@ -13,4 +13,7 @@ public class Articulo {
 	public int getCodigo() {return this.id_codigo;}
 	public String getNombre() {return this.nombre;}
 	public int getCantidad() {return this.cantidad;}
+	public void setCodigo(int id) {this.id_codigo=id;}
+	public void setNombre(String nombre) {this.nombre=nombre;}
+	public void setCantidad(int cantidad) {this.cantidad=cantidad;}
 }

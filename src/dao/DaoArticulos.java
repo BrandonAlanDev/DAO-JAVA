@@ -10,7 +10,7 @@ import controller.Articulo;
 
 public class DaoArticulos implements IDao<Articulo> {
 	DaoConexion cnn;
-	DaoArticulos(){
+	public DaoArticulos(){
 		cnn=new DaoConexion();
 	}
 	@Override
@@ -26,10 +26,34 @@ public class DaoArticulos implements IDao<Articulo> {
 			e.printStackTrace();
 		}
 	}
-	public void eliminar(int id) throws Exception{}
+	public void eliminar(int id) throws Exception{
+		try {
+			Connection conx = cnn.conectar();
+			PreparedStatement comando=conx.prepareStatement("DELETE FROM articulos WHERE id_codigo=?");
+			comando.setInt(1,id);
+			comando.executeUpdate();
+			cnn.desconectar();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public Articulo buscar(int id) throws Exception{
-		
-		return new Articulo(1,"a",2);
+		try {
+			Articulo articulo;
+			Connection conx = cnn.conectar();
+			PreparedStatement comando=conx.prepareStatement("Select * FROM articulos WHERE id_codigo=?");
+			comando.setInt(1,id);
+			ResultSet resultado = comando.executeQuery();
+			if(resultado.next()) {
+				articulo = new Articulo(id,resultado.getString(2),resultado.getInt(3));
+				resultado.close();
+				cnn.desconectar();
+				return articulo;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		throw new Exception("Error buscando");
 	}
 	public List<Articulo> listar() throws Exception{
 		List<Articulo> articulos = new ArrayList<Articulo>();
